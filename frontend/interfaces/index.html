@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css"><title>GovBridge | Government Innovation & Startup Procurement</title>
+  <script src="assets/config.js"></script>
+</head>
+<body data-interface="landing">
+<div id="toastHost"></div>
+<div id="view-landing" class="view">
+  <nav class="marketing-nav">
+    <div class="container bar">
+      <a href="#/" class="brand" onclick="Router.go('/')">
+        <svg class="mark" viewBox="0 0 34 34" fill="none"><rect width="34" height="34" rx="9" fill="#0B2545"/><path d="M9 22V13.5L17 9l8 4.5V22" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.5 22v-6h7v6" stroke="#D97B1D" stroke-width="1.8"/></svg>
+        <div>GovBridge<small>Public Procurement Innovation Platform</small></div>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#/" onclick="Router.go('/')">Home</a>
+        <a href="#how" onclick="goToLandingSection(event, 'how')">How It Works</a>
+        <a href="#problems" onclick="goToLandingSection(event, 'problems')">Problems</a>
+        <a href="#why" onclick="goToLandingSection(event, 'why')">Impact</a>
+        <a href="#about" onclick="goToLandingSection(event, 'about')">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-primary" onclick="Router.go('/login')">Get Started</button>
+        <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Turning Government Challenges into Scalable Innovation</h1>
+        <p class="lead">Connect government departments with verified startups to discover, pilot, procure and scale innovative solutions for public challenges.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="Router.go('/login')">Explore Solutions</button>
+          <button class="btn btn-secondary" onclick="Router.go('/login')">Post a Challenge</button>
+        </div>
+      </div>
+      <div class="lifecycle-art">
+        <h4>The GovBridge lifecycle</h4>
+        <div class="lc-row" id="lcArt"></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="stats-strip">
+    <div class="container grid" id="statsStrip"></div>
+  </section>
+
+  <section class="section" id="problems">
+    <div class="container">
+      <div class="section-head">
+        <h2>From Problem to Public Impact</h2>
+        <p>Every listed challenge moves through a transparent, trackable journey — from the department that raised it to the startup that solves it at scale.</p>
+      </div>
+      <div class="card-grid" id="landingChallenges"></div>
+      <div style="text-align:center;margin-top:28px;">
+        <button class="btn btn-secondary" onclick="Router.go('/login')">View all challenges →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="how">
+    <div class="container">
+      <div class="section-head">
+        <h2>How GovBridge works</h2>
+        <p>A structured six-stage pathway so no promising idea gets lost, and no pilot scales without proof.</p>
+      </div>
+      <div class="hiw-track">
+        <div class="hiw-step"><div class="n">01</div><h4>Identify</h4><p>Government departments publish real-world challenges with clear outcomes and budgets.</p></div>
+        <div class="hiw-step"><div class="n">02</div><h4>Discover</h4><p>Eligible startups browse, filter and submit innovative solutions.</p></div>
+        <div class="hiw-step"><div class="n">03</div><h4>Evaluate</h4><p>Solutions are scored against transparent, weighted criteria by reviewers.</p></div>
+        <div class="hiw-step"><div class="n">04</div><h4>Pilot</h4><p>Selected solutions enter a controlled, time-boxed pilot or proof of concept.</p></div>
+        <div class="hiw-step"><div class="n">05</div><h4>Procure</h4><p>Successful pilots move into a formal procurement pipeline.</p></div>
+        <div class="hiw-step"><div class="n">06</div><h4>Scale</h4><p>Proven solutions expand across departments, regions and states.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="container">
+      <div class="section-head">
+        <h2>Why GovBridge?</h2>
+        <p>Built for how public procurement actually needs to work with early-stage innovation.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg></div><h4>Transparent Evaluation</h4><p>Every proposal is scored on the same published criteria, visible to both sides.</p></div>
+        <div class="why-card"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2l3 6 6 1-4.5 4 1 6L12 16l-5.5 3 1-6L3 9l6-1z"/></svg></div><h4>Verified Startup Ecosystem</h4><p>Startup profiles carry verification status, track record and compliance history.</p></div>
+        <div class="why-card"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 8v4l3 3M12 3a9 9 0 100 18 9 9 0 000-18z"/></svg></div><h4>Pilot Before Scale</h4><p>Nothing reaches full procurement without a tracked, time-boxed pilot outcome.</p></div>
+        <div class="why-card"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 21H3V3M7 15l4-5 3 3 5-7"/></svg></div><h4>Faster Discovery</h4><p>Searchable, filterable challenge marketplace cuts down discovery time for startups.</p></div>
+        <div class="why-card"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 3v18h18M8 17V10M13 17V6M18 17v-4"/></svg></div><h4>Data-Driven Decisions</h4><p>Live analytics on conversion, pilot success rate and procurement pipeline health.</p></div>
+        <div class="why-card"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div><h4>End-to-End Tracking</h4><p>One continuous record from problem statement through to scaled deployment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  
+<section class="section section-alt" id="prototype-interfaces"><div class="container"><div class="section-head"><h2>Explore the GovBridge interfaces</h2><p>Open any prototype screen. Government and startup workspaces require sign in.</p></div><div class="why-grid"><a href="government-dashboard.html">Government Dashboard</a>
+      <a href="government-post-challenge.html">Post Challenge</a>
+      <a href="government-my-challenges.html">My Challenges</a>
+      <a href="government-discover-startups.html">Discover Startups</a>
+      <a href="government-submitted-solutions.html">Submitted Solutions</a>
+      <a href="government-evaluation.html">Evaluation</a>
+      <a href="government-pilots.html">Pilot Projects</a>
+      <a href="government-procurement.html">Government Procurement</a>
+      <a href="government-scale.html">Scale and Deployment</a>
+      <a href="government-outcomes.html">Outcome Records</a>
+      <a href="government-admin.html">Admin and Audit</a>
+      <a href="government-analytics.html">Analytics</a>
+      <a href="government-notifications.html">Government Notifications</a>
+      <a href="government-settings.html">Government Settings</a>
+      <a href="startup-dashboard.html">Startup Dashboard</a>
+      <a href="startup-browse-challenges.html">Browse Challenges</a>
+      <a href="startup-recommended-challenges.html">Recommended Challenges</a>
+      <a href="startup-proposals.html">My Proposals</a>
+      <a href="startup-pilot-projects.html">Startup Pilot Projects</a>
+      <a href="startup-procurement.html">Startup Procurement</a>
+      <a href="startup-performance.html">Performance</a>
+      <a href="startup-profile.html">Startup Profile</a>
+      <a href="startup-notifications.html">Startup Notifications</a></div><p class="small text-muted" style="margin-top:20px;"><a href="signup.html">Create an account</a> · <a href="login.html">Sign in</a></p></div></section>
+<footer class="site-footer" id="about">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand">
+            <svg class="mark" viewBox="0 0 34 34" fill="none"><rect width="34" height="34" rx="9" fill="#1B4B91"/><path d="M9 22V13.5L17 9l8 4.5V22" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.5 22v-6h7v6" stroke="#D97B1D" stroke-width="1.8"/></svg>
+            GovBridge
+          </div>
+          <p class="desc">A startup-friendly public procurement platform helping government departments identify, pilot, procure and scale innovative solutions — built for Smart India Hackathon 2026.</p>
+        </div>
+        <div><h5>Platform</h5><ul><li><a href="#how" onclick="goToLandingSection(event, 'how')">How it works</a></li><li><a href="#problems" onclick="goToLandingSection(event, 'problems')">Challenges</a></li><li><a href="#why" onclick="goToLandingSection(event, 'why')">Why GovBridge</a></li></ul></div>
+        <div><h5>For</h5><ul><li><a href="#" onclick="Router.go('/login')">Government</a></li><li><a href="#" onclick="Router.go('/login')">Startups</a></li></ul></div>
+        <div><h5>Prototype</h5><ul><li><a href="#" onclick="Router.go('/login')">Login</a></li><li><a href="#" onclick="Router.go('/login')">Demo credentials</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 GovBridge. Frontend prototype built for Smart India Hackathon.</span>
+        <span>Not an official Government of India platform.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="assets/app.js"></script>
+<script src="assets/chatbot.js"></script>
+</body>
+</html>
+
+
+
+

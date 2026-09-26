@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css"><title>GovBridge Login</title>
+  <script src="assets/config.js"></script>
+</head>
+<body data-interface="login">
+<div id="toastHost"></div>
+<div id="view-login" class="view">
+  <div class="login-wrap">
+    <div class="login-side">
+      <a href="#/" class="brand" onclick="Router.go('/')">
+        <svg class="mark" viewBox="0 0 34 34" fill="none"><rect width="34" height="34" rx="9" fill="#fff"/><path d="M9 22V13.5L17 9l8 4.5V22" stroke="#0B2545" stroke-width="1.8" stroke-linejoin="round"/><path d="M13.5 22v-6h7v6" stroke="#D97B1D" stroke-width="1.8"/></svg>
+        <div>GovBridge<small style="color:rgba(255,255,255,.6)">Public Procurement Innovation Platform</small></div>
+      </a>
+      <div class="quote">"The fastest route from a government challenge to a working public solution is a <span>transparent pilot</span>, not a lengthy tender."</div>
+      <div class="small" style="color:rgba(255,255,255,.5)">Smart India Hackathon 2026 — GovTech Prototype</div>
+    </div>
+    <div class="login-main">
+      <div class="login-box">
+        <h2 style="font-size:24px;margin-bottom:6px;">Welcome back</h2>
+        <p id="loginIntro" class="text-muted small" style="margin-bottom:24px;">Use the email and password you entered during signup.</p>
+        <div class="role-toggle">
+          <button type="button" id="roleGovBtn" onclick="setLoginRole('government')">Government</button>
+          <button type="button" id="roleStartupBtn" class="active" onclick="setLoginRole('startup')">Startup</button>
+        </div>
+        <div id="demoAccess" hidden>
+          <p class="small text-muted" style="margin:0 0 16px;line-height:1.6;">Public demo: no account or password is needed. Sample changes stay in this browser and are not shared or submitted to GovBridge.</p>
+          <button type="button" class="btn btn-primary btn-block" style="margin-bottom:12px;" onclick="enterDemo('startup')">Explore as Startup</button>
+          <button type="button" class="btn btn-secondary btn-block" onclick="enterDemo('government')">Explore as Government</button>
+        </div>
+        <form id="loginForm" onsubmit="return handleLogin(event)">
+          <div class="field" id="fld_email">
+            <label for="loginEmail">Email address</label>
+            <input type="email" id="loginEmail" placeholder="you@company.com" required>
+            <div class="err-msg">Please enter a valid email.</div>
+          </div>
+          <div class="field" id="fld_pass">
+            <label for="loginPass">Password</label>
+            <input type="password" id="loginPass" placeholder="Enter your password" required>
+            <div class="err-msg">Password is required.</div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <p id="loginStatus" class="small" role="status" aria-live="polite" style="min-height:18px;margin:10px 0 0;text-align:center;color:#b42318;"></p>
+        </form>
+        <p class="small text-muted" style="text-align:center;margin-top:20px;"><a href="#" onclick="Router.go('/')" class="link-btn">← Back to homepage</a></p>
+        <p id="signupPrompt" class="small text-muted" style="text-align:center;margin-top:10px;">New to GovBridge? <a class="link-btn" href="signup.html">Create an account</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script src="assets/chatbot.js"></script>
+</body>
+</html>
+
+

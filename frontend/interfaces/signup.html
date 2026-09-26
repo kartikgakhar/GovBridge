@@ -1,0 +1,107 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account | GovBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    :root{--navy:#0b2545;--royal:#1b4b91;--grey:#5b6472;--line:#e1e5ea;--bg:#f6f7f9;--orange:#d97b1d}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--navy);font:15px Inter, sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px}
+    .card{width:min(100%,520px);background:white;border:1px solid var(--line);border-radius:16px;padding:34px;box-shadow:0 12px 32px #0b25451c}
+    h1{font:800 27px Manrope,sans-serif;margin:0 0 8px}.intro{color:var(--grey);margin:0 0 26px}.brand{font:800 20px Manrope,sans-serif;margin-bottom:28px}.brand span{color:var(--orange)}
+    .roles{display:flex;gap:10px;margin-bottom:22px}.roles label{flex:1;border:1px solid var(--line);border-radius:8px;padding:12px;cursor:pointer;font-weight:600}.roles input{accent-color:var(--royal);margin-right:7px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.field{margin-bottom:16px}.field.full{grid-column:1/-1}.field[hidden]{display:none}label.field-label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+    input{width:100%;padding:11px 12px;border:1px solid #c9cfd8;border-radius:6px;font:14px Inter,sans-serif}input:focus{outline:2px solid #2563ac55;border-color:var(--royal)}
+    button{width:100%;border:0;border-radius:6px;background:var(--royal);color:white;padding:13px;font:600 15px Inter,sans-serif;cursor:pointer}button:hover{background:#2563ac}button:disabled{opacity:.75;cursor:default}.note{font-size:12px;color:var(--grey);line-height:1.5;margin:14px 0 0}#message.success{color:#16834b;font-weight:600}.links{text-align:center;color:var(--grey);font-size:13px;margin:20px 0 0}.links a{color:var(--royal);font-weight:600;text-decoration:none}.demo-link{display:block;margin-top:18px;padding:13px;border-radius:6px;background:var(--royal);color:white;text-align:center;text-decoration:none;font-weight:600}
+    @media(max-width:480px){.card{padding:24px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+  </style>
+  <script src="assets/config.js"></script>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">Gov<span>Bridge</span></div>
+    <h1>Create your account</h1>
+    <p class="intro">Create a startup account to apply to government challenges. Government accounts are issued separately.</p>
+    <div id="demoSignup" hidden>
+      <p class="note">This public preview does not create real accounts. You can explore as a Startup or Government demo user; changes stay in this browser and are not shared with other visitors.</p>
+      <a href="login.html" class="demo-link">Choose a demo role</a>
+    </div>
+    <form id="signupForm">
+      <input type="hidden" name="role" value="startup">
+      <div class="grid">
+        <div class="field"><label class="field-label" for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+        <div class="field"><label class="field-label" for="org">Startup / entity name *</label><input id="org" name="org" autocomplete="organization" minlength="2" maxlength="200" placeholder="Registered startup or entity name" required></div>
+        <div class="field full"><label class="field-label" for="dpiit">DPIIT Certificate of Recognition Number *</label><input id="dpiit" name="dpiit" autocomplete="off" placeholder="e.g. DIPP260" required><p class="note" style="margin-top:6px">Enter the number shown on your Startup India recognition certificate. The number is collected at signup; GovBridge does not automatically verify it yet.</p><p class="note" style="margin-top:4px"><a href="https://www.startupindia.gov.in/content/sih/en/startupgov/validate-startup-recognition.html" target="_blank" rel="noopener noreferrer">Find or verify your certificate number</a></p></div>
+        <div class="field full"><label class="field-label" for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label class="field-label" for="password">Password</label><input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required></div>
+        <div class="field"><label class="field-label" for="confirm">Confirm password</label><input id="confirm" name="confirm" type="password" minlength="8" autocomplete="new-password" required></div>
+      </div>
+      <button type="submit">Create account</button>
+      <p class="note" id="message" aria-live="polite">Your account details will be sent to the GovBridge backend for registration.</p>
+    </form>
+    <p class="links"><a href="login.html">Already have an account? Sign in</a> · <a href="index.html">All interfaces</a></p>
+  </main>
+  <script>
+    const signupForm=document.getElementById('signupForm');
+    if(window.GOVBRIDGE_DEMO_MODE){
+      signupForm.hidden=true;
+      document.getElementById('demoSignup').hidden=false;
+      document.querySelector('.intro').textContent='Explore the GovBridge public preview without creating an account.';
+    }
+    signupForm.addEventListener('submit',async function(event){
+      event.preventDefault();
+      const form=event.currentTarget;
+      const message=document.getElementById('message');
+      message.classList.remove('success');
+      const entityName=form.elements.namedItem('org');
+      if(entityName.value.trim().length<2){
+        entityName.setCustomValidity('Enter your startup or entity name (at least 2 characters).');
+        entityName.reportValidity();
+        entityName.addEventListener('input',()=>entityName.setCustomValidity(''),{once:true});
+        return;
+      }
+      if(form.password.value!==form.confirm.value){
+        form.confirm.setCustomValidity('Passwords do not match.');
+        form.confirm.reportValidity();
+        form.confirm.addEventListener('input',()=>form.confirm.setCustomValidity(''),{once:true});
+        return;
+      }
+      const submitButton=form.querySelector('button[type="submit"]');
+      submitButton.disabled=true;
+      message.textContent='Creating your account…';
+      try{
+        const response=await fetch(`${window.GOVBRIDGE_API_BASE||'http://127.0.0.1:5000'}/api/register`,{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            name:form.elements.namedItem('name').value.trim(),email:form.elements.namedItem('email').value.trim(),password:form.elements.namedItem('password').value,
+            role:'startup',
+            organization_name:form.elements.namedItem('org').value.trim(),dpiit_recognition_number:form.elements.namedItem('dpiit').value.trim()
+          })
+        });
+        const data=await response.json();
+        if(!response.ok) throw new Error(data.error||data.message||'Account registration failed.');
+        message.textContent='Account saved in MySQL. Your details are still shown above; use “Already have an account? Sign in” below to continue.';
+        message.classList.add('success');
+        form.password.value='';
+        form.confirm.value='';
+        submitButton.textContent='Account created';
+        submitButton.disabled=true;
+      }catch(error){
+        message.textContent=error.message==='Failed to fetch'
+          ?'Could not reach the backend. Start the database and backend using backend/DATABASE_SETUP.md, then try again.'
+          :error.message;
+      }finally{submitButton.disabled=false;}
+    });
+  </script>
+  <script src="assets/chatbot.js"></script>
+</body>
+</html>
+
+
+
+
+

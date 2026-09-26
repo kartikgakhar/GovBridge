@@ -1,0 +1,31 @@
+# Local-only reverse proxy for an HTTPS Cloudflare Tunnel share preview.
+# Start Caddy from the GovBridge repository root; expose only this listener.
+:8080 {
+	bind 127.0.0.1
+	encode zstd gzip
+	request_body {
+		max_size 2MB
+	}
+	header {
+		X-Robots-Tag "noindex, nofollow, noarchive"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+	}
+
+	handle /api/* {
+		reverse_proxy 127.0.0.1:5000 {
+			header_up X-GovBridge-Client-IP {http.request.header.CF-Connecting-IP}
+		}
+	}
+	handle_path /chat/* {
+		reverse_proxy 127.0.0.1:5001 {
+			header_up X-GovBridge-Client-IP {http.request.header.CF-Connecting-IP}
+		}
+	}
+	handle {
+		root * frontend/interfaces
+		file_server
+	}
+}
